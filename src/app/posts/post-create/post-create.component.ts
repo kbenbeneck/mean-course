@@ -6,5 +6,11 @@ import { Component } from "@angular/core";
 
 })
 export class PostCreateComponent {
-
+  // property - var in a class
+  enteredValue = '';
+  newPost = 'NO CONTENT';
+  // method func in class. use 'on' for event.
+  onAddPost() {
+    this.newPost = this.enteredValue;
+  }
 }
