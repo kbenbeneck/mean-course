@@ -1,10 +1,12 @@
-<!-- one way prooperty binding '#' local ref-->
-<!-- <textarea rows=6 [value]="newPost" #postInput></textarea> -->
+<mat-card>
+  <mat-form-field>
+    <textarea matInput rows=6 [(ngModel)]="enteredValue"></textarea>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onAddPost()"
+  >Save Post</button>
+</mat-card>
 
-<!-- 2way binding -->
-<textarea rows=6 [(ngModel)]="enteredValue"></textarea>
-<hr>
-<!-- event binding - click listener - declarative -->
-<button (click)="onAddPost()">Save Post</button>
-<!-- string interpolation for output-->
 <p>{{ newPost }}</p>
