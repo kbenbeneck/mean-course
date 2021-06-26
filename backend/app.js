@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose")
 const Post = require('./models/post')
 const app = express();
-mongoose.connect("mongodb+srv://Karl:yv5DZUVKOQxazsRA@cluster0.ehs83.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://Karl:yv5DZUVKOQxazsRA@cluster0.ehs83.mongodb.net/node-angular?retryWrites=true&w=majority")
 .then(() => {
   console.log('Connected to database!')
 })
@@ -29,34 +29,20 @@ app.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content
   });
-  console.log(post);
+  post.save();
   res.status(201).json({
     message: 'Post added successfully'
   });
 });
 
-app.use('/api/posts', (req, res, next) => {
-  const posts = [
-    {
-      id: '1',
-      title: "title 1",
-      content: "content 1"
-    },
-    {
-      id: '2',
-      title: "title 2",
-      content: "content 2"
-    },
-    {
-      id: '3',
-      title: "title 3",
-      content: "content 3"
-    },
-  ]
-  res.status(200).json({
-    message: "Posts fetched successfully!",
-    posts: posts
-  });
+app.get('/api/posts', (req, res, next) => {
+  Post.find()
+    .then(documents => {
+      res.status(200).json({
+        message: "Posts fetched successfully!",
+        posts: documents
+      });
+    });
 });
 
 module.exports = app;
