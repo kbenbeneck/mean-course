@@ -5,13 +5,12 @@ import { PostListComponent } from "./posts/post-list/post-list.component";
 
 const routes: Routes = [
   { path: '', component: PostListComponent },
-  { path: 'create', component: PostCreateComponent }
+  { path: 'create', component: PostCreateComponent },
+  { path: 'edit/:postId', component: PostCreateComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
