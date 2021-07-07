@@ -58,7 +58,8 @@ router.post('/login', (req, res, next) => {
             ok: 1,
             message: 'User Authenticated',
             token: token,
-            expiresIn: 3600
+            expiresIn: 3600,
+            userId: user._id
           });
         }
       });
