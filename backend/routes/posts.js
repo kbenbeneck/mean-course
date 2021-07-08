@@ -45,8 +45,12 @@ router.post(
         ...createdPost,
         id: createdPost._id
       }
-
-    });
+    })
+    .catch(error => {
+      res.status(500).json({
+        messsage: "Failed to create post"
+      })
+    })
   });
 });
 router.patch(
@@ -71,8 +75,13 @@ router.patch(
       if( result.nModified > 0) {
         res.status(200).json({ message: "Update successful!" });
       } else {
-        res.status(401).json({ message: "Update unsuccessful!" });
+        res.status(401).json({ message: "Not authorized!" });
       }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Update unsuccessful"
+      })
     });
   }
 );
@@ -98,6 +107,11 @@ router.get('', (req, res, next) => {
         posts: fetchedPosts,
         maxPosts: count
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching posts failed!"
+      })
     });
 });
 
@@ -108,6 +122,11 @@ router.get("/:id", (req, res, next) => {
     } else {
       res.status(404).json({ message: "Post not found!" })
     }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Fetching post failed!"
+    })
   });
 });
 router.delete(
@@ -118,9 +137,14 @@ router.delete(
     if( result.n > 0) {
       res.status(200).json({ message: "Deletion successful!" });
     } else {
-      res.status(401).json({ message: "Deletion unsuccessful!" });
+      res.status(401).json({ message: "Not authorized!" });
     }
   })
+  .catch(error => {
+    res.status(500).json({
+      message: "Fetching posts failed!"
+    })
+  });
 });
 
 module.exports = router;
